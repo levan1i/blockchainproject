@@ -12,7 +12,8 @@ namespace NeoContract1
         public static readonly byte[] Owner = "AK2nJJpJr6o664CWJKi1QRXjqeic2zRp8y".ToScriptHash();
         public static readonly byte[] Price = "AdprYnf2onVDxdFSt7kiFJiekWFw7L13cW".ToScriptHash();
         public static readonly byte[] Energy = "AZdrfBwgxWm4gLkLDRSjgebpr6f9q1oqsP".ToScriptHash();
-               [DisplayName("transfer")]
+        public static readonly byte[] UserStatus = "AWAgsRcHZo3ibvH2Gikp8XfLgV2hgaWXFh".ToScriptHash();
+        [DisplayName("transfer")]
         public static event Action<byte[], byte[], BigInteger> Transferred;
 
         public static object Main(string method, params object[] args)
@@ -51,26 +52,38 @@ namespace NeoContract1
                 return false;
             }
         }
-    
+
         public static bool Transfer(byte[] from, byte[] to, BigInteger amount)
         {
-           
-            if (from.Length< 20)
+
+            if (from.Length < 20)
                 throw new Exception("Invalid From Address");
-            if (to.Length <20)
+            if (to.Length < 20)
                 throw new Exception("Invalid To Address");
             if (amount < 0)
                 throw new Exception("Invalid Amount");
 
             if (!Runtime.CheckWitness(from))
             {
-                Runtime.Notify("Address check failed", from , to, amount);
+                Runtime.Notify("Address check failed", from, to, amount);
                 return false;
+            }
+            BigInteger pr = GetPrice();
+            BigInteger en = GetEnergy();
+            Runtime.Notify(pr);
+            Runtime.Notify(en);
+
+            BigInteger valu = pr * en;
+            Runtime.Notify(valu);
+
+            if (valu > amount)
+            {
+                amount = valu;
             }
 
             if (amount == 0)
             {
-                Transfer(from, to,  amount);
+                Transfer(from, to, amount);
                 return true;
             }
 
@@ -80,11 +93,18 @@ namespace NeoContract1
                 return true;
             }
 
-            var fromBalance = Storage.Get(Storage.CurrentContext, from).AsBigInteger();
+            var fromBalance = new BigInteger(Storage.Get(Storage.CurrentContext, from));
             var toBalance = Storage.Get(Storage.CurrentContext, to).AsBigInteger();
 
-            if (fromBalance - amount < 0)
+            if ((fromBalance - amount) < 0)
+            {
+                Runtime.Notify(fromBalance);
+                Runtime.Notify(amount);
+                Runtime.Notify((fromBalance - amount));
+                Storage.Put(Storage.CurrentContext, UserStatus, "leftoweramounth");
                 return false;
+            }
+
 
             Storage.Put(Storage.CurrentContext, from, fromBalance - amount);
             Storage.Put(Storage.CurrentContext, to, toBalance + amount);
@@ -96,8 +116,8 @@ namespace NeoContract1
 
         public static object BalanceOf(byte[] address)
         {
-          
-            if (address.Length <20)
+
+            if (address.Length < 20)
                 throw new Exception("Invalid Address");
 
             return Storage.Get(Storage.CurrentContext, address);
@@ -119,14 +139,15 @@ namespace NeoContract1
 
         public static object AddPrice(string indicate)
         {
-            Storage.Put(Storage.CurrentContext, Price,indicate);
+            Storage.Put(Storage.CurrentContext, Price, indicate);
             return Storage.Get(Storage.CurrentContext, Price);
 
         }
 
-        public static object GetPrice()
+        public static BigInteger GetPrice()
         {
-            return Storage.Get(Storage.CurrentContext, Price);
+            BigInteger p = Storage.Get(Storage.CurrentContext, Price).AsBigInteger();
+            return p;
         }
 
         public static object AddEnergy(string energypr)
@@ -136,9 +157,10 @@ namespace NeoContract1
 
         }
 
-        public static object GetEnergy()
+        public static BigInteger GetEnergy()
         {
-            return Storage.Get(Storage.CurrentContext, Energy);
+            BigInteger e = Storage.Get(Storage.CurrentContext, Energy).AsBigInteger();
+            return e;
         }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "hash":"0x47fa5bf9e55be862933a19114e206b51f1b43a03",
+    "hash":"0x7a64fe4ee783aa13e7b975c2c8bc3b6de3bfbb1e",
     "entrypoint":"Main",
     "functions":
     [
@@ -71,7 +71,7 @@
             "parameters":
             [
             ],
-            "returntype":"Any"
+            "returntype":"Integer"
         },
         {
             "name":"AddEnergy",
@@ -89,7 +89,7 @@
             "parameters":
             [
             ],
-            "returntype":"Any"
+            "returntype":"Integer"
         }
     ],
     "events":

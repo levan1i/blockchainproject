@@ -5,3 +5,11 @@ C:\Users\l.odishelidze\source\repos\ET\NeoContract1\obj\Debug\NeoContract1.cspro
 C:\Users\l.odishelidze\source\repos\ET\NeoContract1\obj\Debug\NeoContract1.csproj.CopyComplete
 C:\Users\l.odishelidze\source\repos\ET\NeoContract1\obj\Debug\NeoContract1.dll
 C:\Users\l.odishelidze\source\repos\ET\NeoContract1\obj\Debug\NeoContract1.pdb
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\bin\Debug\NeoContract1.dll
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\bin\Debug\NeoContract1.pdb
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\bin\Debug\Neo.SmartContract.Framework.dll
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\obj\Debug\NeoContract1.csproj.CoreCompileInputs.cache
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\obj\Debug\NeoContract1.csproj.CopyComplete
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\obj\Debug\NeoContract1.dll
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\obj\Debug\NeoContract1.pdb
+C:\Users\l.odishelidze\Desktop\hakathon\project\blockchainproject\NeoContract1\obj\Debug\NeoContract1.csprojAssemblyReference.cache
